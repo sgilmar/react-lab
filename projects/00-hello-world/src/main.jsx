@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import {App} from "./App.jsx";
+import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -17,9 +19,5 @@ const Button = ({title}) => {
 }
 
 root.render(
-    <React.Fragment>
-        <Button title={'Button 1'} />
-        <Button title={'Button 2'} />
-        <Button title={'Button 3'} />
-    </React.Fragment>
+    <App />
 )
