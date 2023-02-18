@@ -40,7 +40,7 @@ function App() {
   // null = no win
   // false = tie
   // true = win
-  const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState(null)
   const checkWinner = (boardToCheck) => {
     for (const combo of WINNER_COMBOS) {
       const [a, b, c] = combo
@@ -64,7 +64,7 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
     // 3) Update states as board
-    const newBoard = [...board];
+    const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard)
     // console.log('newBoard: ', newBoard)
@@ -74,6 +74,13 @@ function App() {
       setWinner(newWinner)
     }
     // 5) Check if game is over
+  }
+
+  const resetGame = () => {
+    // actual initial states
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
   }
 
   return (
@@ -119,7 +126,7 @@ function App() {
               </header>
 
               <footer>
-                <button>Empezar de nuevo</button>
+                <button onClick={resetGame}>Empezar de nuevo</button>
               </footer>
             </div>
           </section>
