@@ -5,6 +5,7 @@ import {Square} from './components/Square'
 import {TURNS} from "./constants.js";
 import {WinnerModal} from "./components/WinnerModal.jsx";
 import {checkWinnerFrom, checkEndGame} from "./logic/board.js";
+import {resetGameStorage, saveGameStorage} from "./logic/storage/index.js";
 
 function App() {
   // Every time you click, it fills up
@@ -39,8 +40,10 @@ function App() {
     setBoard(newBoard)
     // console.log('newBoard: ', newBoard)
     // * Save localstorage
-    window.localStorage.setItem('board', JSON.stringify(newBoard))
-    window.localStorage.setItem('turn', JSON.stringify(newTurn))
+    saveGameStorage({
+      board: newBoard,
+      turn: newTurn
+    })
     // 4) Check who has won
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
@@ -59,8 +62,7 @@ function App() {
     setTurn(TURNS.X)
     setWinner(null)
 
-    window.localStorage.removeItem('board')
-    window.localStorage.removeItem('turn')
+    resetGameStorage()
   }
 
   return (
