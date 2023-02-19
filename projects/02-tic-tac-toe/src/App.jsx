@@ -8,9 +8,21 @@ import {checkWinnerFrom, checkEndGame} from "./logic/board.js";
 
 function App() {
   // Every time you click, it fills up
-  const [board, setBoard] = useState(Array(9).fill(null))
+  const [board, setBoard] = useState(() => {
+    const boardLocalstorage = window.localStorage.getItem('board')
+    return boardLocalstorage ?
+      JSON.parse(boardLocalstorage)
+      :
+      Array(9).fill(null)
+  })
   // State to know whose turn it is
-  const [turn, setTurn] = useState(TURNS.X)
+  const [turn, setTurn] = useState(() => {
+    const turnFromLocalstorage = window.localStorage.getItem('turn')
+    return turnFromLocalstorage ?
+      JSON.parse(turnFromLocalstorage)
+      :
+      TURNS.X
+  })
   // State winner
   // null = no win | false = tie | true = win
   const [winner, setWinner] = useState(null)
@@ -26,6 +38,9 @@ function App() {
     newBoard[index] = turn
     setBoard(newBoard)
     // console.log('newBoard: ', newBoard)
+    // * Save localstorage
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turn', JSON.stringify(newTurn))
     // 4) Check who has won
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
@@ -43,6 +58,9 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turn')
   }
 
   return (
@@ -74,7 +92,7 @@ function App() {
         </Square>
       </section>
 
-      <WinnerModal winner={winner} resetGame={resetGame} />
+      <WinnerModal winner={winner} resetGame={resetGame}/>
     </main>
   )
 }
