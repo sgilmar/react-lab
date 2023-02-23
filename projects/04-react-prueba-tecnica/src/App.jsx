@@ -9,6 +9,7 @@ export function App () {
   const [fact, setFact] = useState()
   const [imageURL, setImageURL] = useState()
 
+  // SRP
   useEffect(() => {
     // Recupera un hecho aleatorio de gatos de la primera API
     fetch(CAT_ENDPOINT_RANDOM_FACT)
@@ -16,19 +17,6 @@ export function App () {
       .then(data => {
         const { fact } = data
         setFact(fact)
-
-        // Recuperar las tres primeras palabras del hecho
-        const threeWords = fact.split(' ', 3).join(' ')
-        console.log(threeWords)
-
-        // Muestra una imagen de un gato con las tres primeras palabras
-        fetch(`https://cataas.com/cat/says/${threeWords}?json=true`)
-          .then(res => res.json())
-          .then(data => {
-            const { url } = data
-            setImageURL(url)
-            console.log(data)
-          })
       })
   }, [])
 
@@ -41,13 +29,30 @@ export function App () {
   //   getRandomFetch()
   // },[])
 
+  useEffect(() => {
+    if (!fact) return
+
+    // Recuperar las tres primeras palabras del hecho
+    const threeWords = fact.split(' ', 3).join(' ')
+    console.log(threeWords)
+
+    // Muestra una imagen de un gato con las tres primeras palabras
+    fetch(`https://cataas.com/cat/says/${threeWords}?json=true`)
+      .then(res => res.json())
+      .then(data => {
+        const { url } = data
+        setImageURL(url)
+        console.log(data)
+      })
+  }, [fact])
+
   return (
     <main>
       <h1>App de gatitos</h1>
-      {/*<section>*/}
-      { fact && <p> { fact }</p> }
-      { imageURL && <img src={ `${CAT_PREFIX_IMAGE_URL}${imageURL}` } alt={ `Image extracted using first three words for ${fact}` } /> }
-      {/*</section>*/}
+      <section>
+        { fact && <p> { fact }</p> }
+        { imageURL && <img src={ `${CAT_PREFIX_IMAGE_URL}${imageURL}` } alt={ `Image extracted using first three words for ${fact}` } /> }
+      </section>
     </main>
   )
 }
