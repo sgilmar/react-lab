@@ -1,6 +1,5 @@
 import { useCatFact } from './hooks/useCatFact.js'
 import { useCatImage } from './hooks/useCatImage.js'
-import { CAT_PREFIX_IMAGE_URL } from './constants.js'
 import './App.css'
 
 export function App () {
@@ -8,7 +7,7 @@ export function App () {
   const { imageURL } = useCatImage({ fact })
 
   const handleClick = () => {
-    refreshFact
+    refreshFact()
   }
 
   return (
