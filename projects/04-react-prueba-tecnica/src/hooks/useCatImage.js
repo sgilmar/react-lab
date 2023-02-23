@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getRandomImage } from '../services/images.js'
+import { CAT_PREFIX_IMAGE_URL } from '../constants.js'
 
 export function useCatImage({ fact }) {
   const [imageURL, setImageURL] = useState()
@@ -14,5 +15,5 @@ export function useCatImage({ fact }) {
     getRandomImage(threeWords).then(newImage => setImageURL(newImage))
   }, [fact])
 
-  return { imageURL }
+  return { imageURL: `${CAT_PREFIX_IMAGE_URL}${imageURL}` }
 }

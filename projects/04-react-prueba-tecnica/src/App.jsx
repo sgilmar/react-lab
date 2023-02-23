@@ -17,7 +17,7 @@ export function App () {
       <button onClick={handleClick}>Get new fact</button>
       <section>
         { fact && <p> { fact }</p> }
-        { imageURL && <img src={ `${CAT_PREFIX_IMAGE_URL}${imageURL}` } alt={ `Image extracted using first three words for ${fact}` } /> }
+        { imageURL && <img src={ imageURL } alt={ `Image extracted using first three words for ${fact}` } /> }
       </section>
     </main>
   )
