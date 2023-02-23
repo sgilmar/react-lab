@@ -11,6 +11,15 @@ export function App () {
       .then(data => setFact(data.fact))
   }, [])
 
+  // useEffect( () => {
+  //   async function getRandomFetch() {
+  //     const res = await fetch(CAT_ENDPOINT_RANDOM_FACT)
+  //     const data = await res.json()
+  //     setFact(data.fact)
+  //   }
+  //   getRandomFetch()
+  // },[])
+
   return (
     <main>
       <h1>App de gatitos</h1>
