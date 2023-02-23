@@ -20,15 +20,6 @@ export function App () {
       })
   }, [])
 
-  // useEffect( () => {
-  //   async function getRandomFetch() {
-  //     const res = await fetch(CAT_ENDPOINT_RANDOM_FACT)
-  //     const data = await res.json()
-  //     setFact(data.fact)
-  //   }
-  //   getRandomFetch()
-  // },[])
-
   useEffect(() => {
     if (!fact) return
 
@@ -46,9 +37,19 @@ export function App () {
       })
   }, [fact])
 
+  const handleClick = () => {
+    fetch(CAT_ENDPOINT_RANDOM_FACT)
+      .then(res => res.json())
+      .then(data => {
+        const { fact } = data
+        setFact(fact)
+      })
+  }
+
   return (
     <main>
       <h1>App de gatitos</h1>
+      <button onClick={handleClick}>Get new fact</button>
       <section>
         { fact && <p> { fact }</p> }
         { imageURL && <img src={ `${CAT_PREFIX_IMAGE_URL}${imageURL}` } alt={ `Image extracted using first three words for ${fact}` } /> }

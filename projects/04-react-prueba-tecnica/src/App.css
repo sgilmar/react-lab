@@ -18,4 +18,16 @@ main section {
 main section img {
   max-width: 430px;
   height: auto;
+  border-radius: 5px;
+}
+
+main button {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+main button:hover {
+  background-color: beige;
+  border-radius: 5px;
 }
