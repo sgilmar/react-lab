@@ -9,8 +9,7 @@ export function App () {
   const [fact, setFact] = useState()
   const [imageURL, setImageURL] = useState()
 
-  // SRP
-  useEffect(() => {
+  const getRandomFact = () => {
     // Recupera un hecho aleatorio de gatos de la primera API
     fetch(CAT_ENDPOINT_RANDOM_FACT)
       .then(res => res.json())
@@ -18,7 +17,10 @@ export function App () {
         const { fact } = data
         setFact(fact)
       })
-  }, [])
+  }
+
+  // SRP
+  useEffect(getRandomFact,[])
 
   useEffect(() => {
     if (!fact) return
@@ -38,12 +40,7 @@ export function App () {
   }, [fact])
 
   const handleClick = () => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then(res => res.json())
-      .then(data => {
-        const { fact } = data
-        setFact(fact)
-      })
+    getRandomFact()
   }
 
   return (
