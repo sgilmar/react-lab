@@ -1,0 +1,20 @@
+.page-movies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-movies header .form {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0;
+}
+
+.page-movies header input {
+  width: 290px;
+}
+
+.page-movies main {
+  margin: 1rem 0;
+}
