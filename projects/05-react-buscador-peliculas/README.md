@@ -5,7 +5,7 @@ Crea una aplicación para buscar películas
 
 Requerimientos:
 
-- Necesita mostrar un input para buscar la película y un botón para buscar.
+✅ Necesita mostrar un input para buscar la película y un botón para buscar.
 
 - Lista las películas encontradas y muestra el título, año y poster.
 
