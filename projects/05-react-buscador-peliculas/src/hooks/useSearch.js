@@ -1,11 +1,17 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from 'react';
 
 export function useSearch() {
   const [movie, setMovie] = useState('')
   const [error, setError] = useState(null)
+  const isFirstInput = useRef(true)
 
   // Input validation
   useEffect(() => {
+    if (isFirstInput.current) {
+      isFirstInput.current = movie === ''
+      return
+    }
+
     if (movie === '') {
       setError('No se puede buscar una película vacía')
       return
