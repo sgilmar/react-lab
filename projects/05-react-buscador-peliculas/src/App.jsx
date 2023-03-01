@@ -4,13 +4,14 @@ import {useMovies} from "./hooks/useMovies.js";
 import {useSearch} from "./hooks/useSearch.js";
 
 function App() {
-  const { movies } = useMovies()
   const { movie, setMovie, error } = useSearch()
+  const { movies, getMovies } = useMovies({ movie })
 
   // get form inputs when there are many
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(movie)
+    // console.log(movie)
+    getMovies()
   }
 
   const handleChange = (event) => {
