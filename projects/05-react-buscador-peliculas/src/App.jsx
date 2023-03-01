@@ -2,13 +2,21 @@ import './App.css'
 import {Movies} from './components/Movies.jsx';
 import {useMovies} from './hooks/useMovies.js';
 import {useSearch} from './hooks/useSearch.js';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
+import debounce from 'just-debounce-it'
 
 function App() {
   const [sort, setSort] = useState(false);
 
   const { movie, setMovie, error } = useSearch()
   const { movies, getMovies, loading } = useMovies({ movie, sort })
+
+  const debounceGetMovies = useCallback(
+    debounce(movie => {
+      getMovies({ movie })
+    }, 500)
+    , []
+  )
 
   // get form inputs when there are many
   const handleSubmit = (event) => {
@@ -22,7 +30,7 @@ function App() {
     if (newMovie.startsWith(' ')) return
 
     setMovie(newMovie)
-    getMovies({ movie: newMovie })
+    debounceGetMovies(newMovie)
   }
 
   const handleSort = () => {
