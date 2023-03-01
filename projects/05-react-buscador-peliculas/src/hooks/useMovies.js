@@ -8,7 +8,7 @@ export function useMovies({ movie, sort }) {
   const previousSearchMovie = useRef(movie)
 
   const getMovies = useMemo( () => {
-    return async () => {
+    return async ({ movie }) => {
       if (movie === previousSearchMovie.current) return
 
       try {
@@ -23,7 +23,7 @@ export function useMovies({ movie, sort }) {
         setLoading(false)
       }
     }
-  },[movie])
+  },[])
 
   const sortedMovies = useMemo(() => {
     return sort

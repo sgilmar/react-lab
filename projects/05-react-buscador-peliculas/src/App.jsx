@@ -14,7 +14,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
     // console.log(movie)
-    getMovies()
+    getMovies({ movie })
   }
 
   const handleChange = (event) => {
