@@ -1,0 +1,3 @@
+packages:
+  - # All projects inside projects are packages
+  - 'projects/**'
