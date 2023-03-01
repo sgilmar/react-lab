@@ -1,11 +1,14 @@
 import './App.css'
-import {Movies} from "./components/Movies.jsx";
-import {useMovies} from "./hooks/useMovies.js";
-import {useSearch} from "./hooks/useSearch.js";
+import {Movies} from './components/Movies.jsx';
+import {useMovies} from './hooks/useMovies.js';
+import {useSearch} from './hooks/useSearch.js';
+import {useState} from 'react';
 
 function App() {
+  const [sort, setSort] = useState(false);
+
   const { movie, setMovie, error } = useSearch()
-  const { movies, getMovies, loading } = useMovies({ movie })
+  const { movies, getMovies, loading } = useMovies({ movie, sort })
 
   // get form inputs when there are many
   const handleSubmit = (event) => {
@@ -18,6 +21,10 @@ function App() {
     const newMovie = event.target.value
     if (newMovie.startsWith(' ')) return
     setMovie(newMovie)
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   return (
@@ -33,6 +40,7 @@ function App() {
             name='movie'
             placeholder='Avengers, Hulk, Star Wars...'
           />
+          <input type='checkbox' onChange={handleSort} checked={sort}  />
           <button type='submit'>Buscar</button>
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
