@@ -1,7 +1,7 @@
 const API_KEY = 'c879528b'
 
 export const searchMovies = async ({ movie }) => {
-  if (movie !== '') return null
+  if (movie === '') return null
 
   try {
     const response = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${movie}`)
@@ -17,7 +17,6 @@ export const searchMovies = async ({ movie }) => {
       poster: movie.Poster
     }))
   } catch (error) {
-    console.log(error)
     throw new Error('Error searching movies')
   }
 }

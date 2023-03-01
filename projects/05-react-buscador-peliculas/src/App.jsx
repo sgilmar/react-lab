@@ -5,7 +5,7 @@ import {useSearch} from "./hooks/useSearch.js";
 
 function App() {
   const { movie, setMovie, error } = useSearch()
-  const { movies, getMovies } = useMovies({ movie })
+  const { movies, getMovies, loading } = useMovies({ movie })
 
   // get form inputs when there are many
   const handleSubmit = (event) => {
@@ -39,7 +39,9 @@ function App() {
       </header>
 
       <main>
-          <Movies movies={movies} />
+        {
+          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+        }
       </main>
     </div>
   )
