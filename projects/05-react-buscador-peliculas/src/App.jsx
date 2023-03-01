@@ -20,7 +20,9 @@ function App() {
   const handleChange = (event) => {
     const newMovie = event.target.value
     if (newMovie.startsWith(' ')) return
+
     setMovie(newMovie)
+    getMovies({ movie: newMovie })
   }
 
   const handleSort = () => {
